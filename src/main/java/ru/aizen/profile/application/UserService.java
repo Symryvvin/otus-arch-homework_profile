@@ -2,9 +2,12 @@ package ru.aizen.profile.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.aizen.profile.domain.user.*;
+import ru.aizen.profile.domain.user.Email;
+import ru.aizen.profile.domain.user.Phone;
+import ru.aizen.profile.domain.user.User;
+import ru.aizen.profile.domain.user.UserRepository;
 
-import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,51 +19,40 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public void create(String username, String firstName, String lastName, String email, String phone) throws UserServiceException {
-		try {
-			User user = User.from(username, firstName, lastName, email, phone);
-			userRepository.add(user);
-		} catch (UserRepositoryException e) {
-			throw new UserServiceException(e);
-		}
+	public void create(String username, String firstName, String lastName, String email, String phone) {
+		User user = User.from(username, firstName, lastName, email, phone);
+		userRepository.save(user);
 	}
 
-	public void delete(long userId) throws UserServiceException {
-		try {
-			userRepository.delete(userId);
-		} catch (UserRepositoryException e) {
-			throw new UserServiceException(e);
-		}
+	public void delete(long userId) {
+		userRepository.deleteById(userId);
 	}
 
-	public void update(long userId, String firstName, String lastName, String email, String phone) throws UserServiceException {
-		try {
-			User user = userRepository.find(userId);
+	public void update(long userId, String firstName, String lastName, String email, String phone)
+			throws UserServiceException {
+		Optional<User> userOptional = userRepository.findById(userId);
+
+		if (userOptional.isPresent()) {
+			User user = userOptional.get();
 
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setPhone(Phone.from(phone));
 			user.setEmail(Email.from(email));
 
-			userRepository.update(user);
-		} catch (UserRepositoryException e) {
-			throw new UserServiceException(e);
-		}
-	}
-
-	public Collection<User> getAllUsers() throws UserServiceException {
-		try {
-			return userRepository.findAll();
-		} catch (UserRepositoryException e) {
-			throw new UserServiceException(e);
+			userRepository.save(user);
+		} else {
+			throw new UserServiceException("User with id " + userId + " not found");
 		}
 	}
 
 	public User findUser(long userId) throws UserServiceException {
-		try {
-			return userRepository.find(userId);
-		} catch (UserRepositoryException e) {
-			throw new UserServiceException(e);
+		Optional<User> userOptional = userRepository.findById(userId);
+
+		if (userOptional.isPresent()) {
+			return userOptional.get();
+		} else {
+			throw new UserServiceException("User with id " + userId + " not found");
 		}
 	}
 

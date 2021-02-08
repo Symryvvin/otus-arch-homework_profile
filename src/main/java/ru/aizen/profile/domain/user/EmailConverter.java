@@ -1,4 +1,4 @@
-package ru.aizen.profile.infrastructure.repsistence.user;
+package ru.aizen.profile.domain.user;
 
 import ru.aizen.profile.domain.user.Email;
 

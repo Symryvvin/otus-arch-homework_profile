@@ -1,22 +1,38 @@
 package ru.aizen.profile.domain.user;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.util.Assert;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@Entity(name = "USER")
+@Table(name = "USER")
 public class User {
 
 	private static final int MAX_USERNAME_LENGTH = 256;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private long id;
+	@Column(name = "USERNAME", nullable = false)
 	private String username;
+	@Column(name = "FIRST_NAME")
 	private String firstName;
+	@Column(name = "LAST_NAME")
 	private String lastName;
+	@Column(name = "EMAIL")
+	@Convert(converter = EmailConverter.class)
 	private Email email;
+	@Column(name = "PHONE")
+	@Convert(converter = PhoneConverter.class)
 	private Phone phone;
 
 	private User(String username, String firstName, String lastName, Email email, Phone phone) {
