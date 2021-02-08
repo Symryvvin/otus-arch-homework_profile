@@ -3,6 +3,7 @@ package ru.aizen.profile.domain.user;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.util.Assert;
 
 @Getter
 @Setter
@@ -27,6 +28,10 @@ public class User {
 	}
 
 	public static User from(String username, String firstName, String lastName, String email, String phone) {
+		Assert.hasLength(username, "Username is required");
+		if (username.length() > 256) {
+			throw new IllegalArgumentException("The username must be a string with a maximum length of " + MAX_USERNAME_LENGTH);
+		}
 		return new User(username, firstName, lastName, Email.from(email), Phone.from(phone));
 	}
 

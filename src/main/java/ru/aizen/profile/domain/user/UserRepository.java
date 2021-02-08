@@ -6,7 +6,9 @@ public interface UserRepository {
 
 	long add(User user) throws UserRepositoryException;
 
-	void delete(long studentId) throws UserRepositoryException;
+	User find(long userId) throws UserRepositoryException;
+
+	void delete(long userId) throws UserRepositoryException;
 
 	void update(User user) throws UserRepositoryException;
 

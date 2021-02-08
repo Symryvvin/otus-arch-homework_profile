@@ -1,12 +1,15 @@
 package ru.aizen.profile.infrastructure.repsistence.user;
 
+import org.springframework.stereotype.Repository;
 import ru.aizen.profile.domain.user.User;
 import ru.aizen.profile.domain.user.UserRepository;
+import ru.aizen.profile.domain.user.UserRepositoryException;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class InMemoryUserRepository implements UserRepository {
 
 	private final Map<Long, User> storage;
@@ -26,8 +29,17 @@ public class InMemoryUserRepository implements UserRepository {
 	}
 
 	@Override
-	public void delete(long userId) {
-		storage.remove(userId);
+	public User find(long userId) {
+		return storage.get(userId);
+	}
+
+	@Override
+	public void delete(long userId) throws UserRepositoryException {
+		if (storage.get(userId) != null) {
+			storage.remove(userId);
+		} else {
+			throw new UserRepositoryException("User with id " + userId + " not found");
+		}
 	}
 
 	@Override

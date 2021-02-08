@@ -10,6 +10,7 @@ class EmailTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {
+			"bestjohn@doe.com",
 			"user@domain.com",
 			"user@domain.co.in",
 			"user.name@domain.com",
