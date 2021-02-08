@@ -1,4 +1,4 @@
-package ru.aizen.profile.application.rest;
+package ru.aizen.profile.application.rest.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +20,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@PostMapping(path = "/user",
-			consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> create(@RequestBody UserDataRequest request) {
 		userService.create(
 				request.getUsername(),
@@ -49,8 +48,7 @@ public class UserController {
 		return ResponseEntity.ok().build();
 	}
 
-	@GetMapping(path = "/user/{userId}",
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public User findUser(@PathVariable("userId") long userId) throws UserServiceException {
 		return userService.findUser(userId);
 	}

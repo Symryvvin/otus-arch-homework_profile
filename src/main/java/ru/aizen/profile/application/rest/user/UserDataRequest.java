@@ -1,4 +1,4 @@
-package ru.aizen.profile.application.rest;
+package ru.aizen.profile.application.rest.user;
 
 import lombok.Getter;
 import lombok.Setter;
