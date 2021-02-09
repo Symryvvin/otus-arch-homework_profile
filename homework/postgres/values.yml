@@ -1,0 +1,20 @@
+fullnameOverride: otushwdb
+postgresqlUsername: postgres
+postgresqlPassword: pa$$w0rD
+postgresqlDatabase: usr
+initdbScripts:
+   create_table.sql: |
+      CREATE TABLE profile (id BIGSERIAL PRIMARY KEY, username VARCHAR(256) UNIQUE NOT NULL, first_name VARCHAR(256), last_name VARCHAR(256), email VARCHAR(256), phone BIGINT);
+
+service:
+  type: NodePort
+  port: 55555
+
+persistence:
+  enabled: true
+  size: 256Mi
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m

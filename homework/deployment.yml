@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: profile-app
+  template:
+    metadata:
+      labels:
+        app: profile-app
+    spec:
+      containers:
+        - name: profile-app
+          image: symryvvin/profile:1.0
+          env: 
+            - name: DB_DRIVER
+              value: org.postgresql.Driver
+            - name: DB_URL
+              value: jdbc:postgresql://otushwdb:55555/usr
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: pa$$w0rD
+            - name: DB_DIALECT
+              value: rg.hibernate.dialect.PostgreSQLDialect
+          ports:
+            - name: web
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /health
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /ready
+            initialDelaySeconds: 30
+            periodSeconds: 5
