@@ -4,7 +4,7 @@ metadata:
   name: profile-app-service
 spec:
   selector:
-    app: porifle-app
+    app: profile-app
   ports:
     - protocol: TCP
       port: 9000
