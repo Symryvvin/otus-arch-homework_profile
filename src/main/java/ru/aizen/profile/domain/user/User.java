@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @Entity(name = "USER")
-@Table(name = "USER")
+@Table(name = "PROFILE")
 public class User {
 
 	private static final int MAX_USERNAME_LENGTH = 256;
