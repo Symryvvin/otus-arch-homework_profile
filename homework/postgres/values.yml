@@ -8,7 +8,7 @@ initdbScripts:
 
 service:
   type: NodePort
-  port: 55555
+  port: 5432
 
 persistence:
   enabled: true

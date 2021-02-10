@@ -15,13 +15,11 @@ spec:
       containers:
         - name: profile-app
           image: symryvvin/profile:1.0
-          env:
-            - name: DB_URL
-              value: jdbc:postgresql://otushwdb:55555/usr
-            - name: DB_USERNAME
-              value: postgres
-            - name: DB_PASSWORD
-              value: pa$$$$w0rD
+          envFrom:
+            - configMapRef:
+                name: profile-app-config
+            - secretRef:
+                name: profile-app-secret
           ports:
             - name: web
               containerPort: 8080
