@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: profile-app-monitoring
+  labels:
+    release: prom
+spec:
+  endpoints:
+  - port: metrics
+    path: /actuator/prometheus
+    interval: 15s
+  selector:
+    matchLabels:
+      app: profile-app-metrics
+  namespaceSelector:
+    matchNames:
+    - default

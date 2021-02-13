@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: profile-app
-          image: symryvvin/profile:1.0
+          image: symryvvin/profile:2.0
           envFrom:
             - configMapRef:
                 name: profile-app-config
