@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "de47a0f4-12e2-4d6e-bada-004d8833ebcd",
+		"name": "otus-homework-profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"johndoe589\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"email\": \"bestjohn@doe.com\",\r\n  \"phone\": \"+71002003040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUri}}/otusapp/ushakov/api/v1/user",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"otusapp",
+						"ushakov",
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/otusapp/ushakov/api/v1/user/:userId",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"otusapp",
+						"ushakov",
+						"api",
+						"v1",
+						"user",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\",\r\n  \"email\": \"username@example.com\",\r\n  \"phone\": \"+71002003040\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUri}}/otusapp/ushakov/api/v1/user/:userId",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"otusapp",
+						"ushakov",
+						"api",
+						"v1",
+						"user",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find User by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/otusapp/ushakov/api/v1/user/:userId",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"otusapp",
+						"ushakov",
+						"api",
+						"v1",
+						"user",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "App health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/otusapp/ushakov/health",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"otusapp",
+						"ushakov",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUri",
+			"value": "http://arch.homework"
+		}
+	]
+}
